@@ -17,8 +17,8 @@ Alternatively, run `cargo build` and run the executable directly inside the `./t
 ## Arguments
 | Flag          | Value | Explanation                                           |
 | ----------    | ----- | ----------------------------------------------------- |
-| -p | -port    | u32   | Port that the TCP server will listen on               |
-| -t | -threads | usize | Number of threads to be available to the `ThreadPool` | 
+| -p / -port    | u32   | Port that the TCP server will listen on               |
+| -t / -threads | usize | Number of threads to be available to the `ThreadPool` | 
 
 For example, to start the server on port `8080` and allocate `16` threads, you'd run:
 `cargo run -- -p 8080 -t 16`
