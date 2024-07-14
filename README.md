@@ -12,6 +12,21 @@ This Rust TCP server is extremely rudimentary, and as such, should never be used
 ## Starting the server
 To start the server, run `cargo run`. 
 
+Alternatively, run `cargo build` and run the executable directly inside the `./target/debug/` directory.
+
+## Arguments
+| Flag          | Value | Explanation                                           |
+| ----------    | ----- | ----------------------------------------------------- |
+| -p | -port    | u32   | Port that the TCP server will listen on               |
+| -t | -threads | usize | Number of threads to be available to the `ThreadPool` | 
+
+For example, to start the server on port `8080` and allocate `16` threads, you'd run:
+`cargo run -- -p 8080 -t 16`
+or
+`./target/debug/rust-tcp-server.exe -p 8080 -t 16`
+
 ## Default settings 
 The server, by default, listens on `127.0.0.1:8888`.
+
 By default, `4` threads are allocated to the `ThreadPool`. 
+
