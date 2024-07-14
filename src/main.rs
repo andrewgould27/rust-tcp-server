@@ -9,7 +9,7 @@ use rust_tcp_server::ThreadPool;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
-    let mut port = 8888;
+    let mut port: u32 = 8888;
     let mut num_threads: usize = 4;
 
     let mut i = 0;
@@ -17,7 +17,7 @@ fn main() {
         match args[i].as_str() {
             "-p" | "-port" => {
                 if i + 1 < args.len() {
-                    port = args[i + 1].parse::<i32>().unwrap();
+                    port = args[i + 1].parse::<u32>().unwrap();
                 }
             }
             "-t" | "-threads" => {
