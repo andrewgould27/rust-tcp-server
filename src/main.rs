@@ -1,4 +1,5 @@
 use std::{
+    env,
     fs,
     io::{prelude::*, BufReader},
     net::{TcpListener, TcpStream},
@@ -7,8 +8,34 @@ use std::{
 use rust_tcp_server::ThreadPool;
 
 fn main() {
-    let listener = TcpListener::bind("127.0.0.1:8888").unwrap();
-    let thread_pool = ThreadPool::new(4);
+    let args: Vec<String> = env::args().collect();
+    let mut port = 8888;
+    let mut num_threads: usize = 4;
+
+    let mut i = 0;
+    while i < args.len() {
+        match args[i].as_str() {
+            "-p" | "-port" => {
+                if i + 1 < args.len() {
+                    port = args[i + 1].parse::<i32>().unwrap();
+                }
+            }
+            "-t" | "-threads" => {
+                if i + 1 < args.len() {
+                    num_threads = args[i + 1].parse::<usize>().unwrap();
+                }
+            }
+            _ => ()
+        }
+
+        i += 1;
+    }
+
+    let listener = TcpListener::bind(format!("127.0.0.1:{port}")).unwrap();
+    let thread_pool = ThreadPool::new(num_threads);
+
+    println!("Listening on port {port}.");
+    println!("Thread pool initialized with {num_threads} threads.");
 
     for stream in listener.incoming() {
         let stream = stream.unwrap();
